@@ -59,7 +59,7 @@ public final class LocksClientEvents
 				lockable.tick();
 		});
 	}
-	
+	/*
 	// TODO Use voxel shapes instead
 	// TODO Move render to Lockable?
 	@SubscribeEvent
@@ -128,4 +128,6 @@ public final class LocksClientEvents
 
 		GlStateManager.enableLighting();
 	}
+
+	 */
 }

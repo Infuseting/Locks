@@ -2,11 +2,11 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "https://maven.minecraftforge.net" }
-		maven { url = "https://repo.spongepowered.org/maven" }
+        maven { url = "https://repo.spongepowered.org/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-		classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -33,12 +33,12 @@ minecraft {
 
 configurations {
     embed
-	implementation.extendsFrom(embed)
+    implementation.extendsFrom(embed)
 }
 
 dependencies {
-    
-	embed("org.spongepowered:mixin:0.7.11-SNAPSHOT") { transitive = false } 
+    compile fileTree(dir: 'libs', include: '*.jar')
+    embed("org.spongepowered:mixin:0.7.11-SNAPSHOT") { transitive = false }
 
 }
 
@@ -48,19 +48,19 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
 
 sourceSets {
-	main {
-		ext.refMap = "mixins.locks.refmap.json"
-	}
+    main {
+        ext.refMap = "mixins.locks.refmap.json"
+    }
 }
 
 jar {
@@ -68,11 +68,11 @@ jar {
         exclude "LICENSE.txt", "META-INF/MANIFSET.MF", "META-INF/maven/**", "META-INF/*.RSA", "META-INF/*.SF"
     }
     manifest.attributes(
-        "FMLCorePluginContainsFMLMod": "true",
-        "ForceLoadAsMod": "true",
-	    "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-	    "TweakOrder": 0,
-        "MixinConfigs": "mixins.locks.json",
-        "FMLCorePlugin": "melonslise.locks.mixin.MixinLoader"
+            "FMLCorePluginContainsFMLMod": "true",
+            "ForceLoadAsMod": "true",
+            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+            "TweakOrder": 0,
+            "MixinConfigs": "mixins.locks.json",
+            "FMLCorePlugin": "melonslise.locks.mixin.MixinLoader"
     )
 }
